@@ -72,7 +72,7 @@ function FeedbackSuccess() {
         }}
       >
         <p style={{ fontSize: "0.75rem", color: "#9A9A9A", letterSpacing: "0.04em" }}>
-          — CANOROUS TECHNOLOGIES · AI POWERED ENGINEERING INTELLIGENCE
+          — CTPL · CANOROUS TECHNOLOGIES · AI POWERED ENGINEERING INTELLIGENCE
         </p>
       </div>
     </motion.div>

@@ -56,15 +56,56 @@ const CAPABILITIES = [
     title: "Digital Twin",
     description: "Live digital replicas of physical assets enabling real-time monitoring.",
   },
+];
+
+const BENEFITS = [
   {
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B22222" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
       </svg>
     ),
-    title: "Pixel Streaming",
-    description: "Cloud-rendered Unreal Engine visuals streamed directly to any browser.",
+    title: "Realistic Visualization",
+    description: "Photoreal. Real-time. Impactful.",
   },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B22222" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v18h18" />
+        <path d="M7 16l4-8 4 4 4-10" />
+      </svg>
+    ),
+    title: "Data-Driven Decisions",
+    description: "Design. Validate. Optimize.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B22222" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    title: "Faster Approvals",
+    description: "Streamline reviews. Reduce delays.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B22222" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    ),
+    title: "Better ROI & Efficiency",
+    description: "Lower costs. Higher returns.",
+  },
+];
+
+const STATS = [
+  { value: "50+", label: "Projects Delivered" },
+  { value: "25+", label: "Expert Professionals" },
+  { value: "10+", label: "Industries Served" },
+  { value: "100%", label: "Client Satisfaction" },
 ];
 
 const containerVariants = {
@@ -107,7 +148,7 @@ export default function CompanyOverview() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.5rem" }}>
             <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            <span className="section-label">Company Overview</span>
+            <span className="section-label">CTPL · Unit of Canorous Technologies</span>
           </div>
 
           <h2
@@ -128,18 +169,17 @@ export default function CompanyOverview() {
           </h2>
 
           <p style={{ fontSize: "0.9rem", color: "#4A4A4A", lineHeight: 1.85, marginBottom: "1.5rem" }}>
-            Canorous Technologies is an AI-powered engineering intelligence
-            company headquartered in India. We bridge the gap between complex
-            engineering data and intuitive visual experiences — delivering
-            photorealistic 3D models, VR simulations, intelligent AI agents,
-            and full-stack software solutions.
+            CTPL is an AI-powered engineering intelligence unit of Canorous Technologies,
+            delivering end-to-end solutions across AR, VR, AI Agents, Digital Twins,
+            Software, MEP, and Industrial Training. We bridge the gap between complex
+            engineering data and intuitive visual experiences.
           </p>
 
           <p style={{ fontSize: "0.9rem", color: "#4A4A4A", lineHeight: 1.85, marginBottom: "2rem" }}>
-            From real estate and construction to manufacturing and enterprise
-            software, our cross-domain expertise enables clients to visualise,
-            simulate, and automate their most complex workflows with precision
-            and speed.
+            One Partner for Visualization, Simulation &amp; Automation for a Smarter Future —
+            serving real estate, construction, manufacturing, and enterprise clients
+            with photorealistic 3D models, VR simulations, intelligent AI agents,
+            and full-stack software solutions.
           </p>
 
           {/* Differentiators */}
@@ -240,9 +280,125 @@ export default function CompanyOverview() {
         </motion.div>
       </div>
 
+      {/* Benefits Section */}
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "4rem 2rem 0" }}>
+        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+            <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
+            <span className="section-label">Why TPL</span>
+            <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
+          </div>
+          <h2
+            style={{
+              fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)",
+              fontWeight: 800,
+              color: "#0F172A",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Delivering Measurable Business Value
+          </h2>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "1px",
+            background: "#D9D9D9",
+            border: "1px solid #D9D9D9",
+          }}
+          className="benefits-grid"
+        >
+          {BENEFITS.map(({ icon, title, description }) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4 }}
+              style={{
+                background: "#FFFFFF",
+                padding: "2rem 1.5rem",
+                textAlign: "center",
+              }}
+            >
+              <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "center" }}>
+                {icon}
+              </div>
+              <div
+                style={{
+                  fontSize: "0.85rem",
+                  fontWeight: 700,
+                  color: "#0F172A",
+                  marginBottom: "0.375rem",
+                  letterSpacing: "-0.01em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {title}
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#757575", lineHeight: 1.6 }}>
+                {description}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "4rem 2rem 0" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "1px",
+            background: "#D9D9D9",
+            border: "1px solid #D9D9D9",
+          }}
+          className="stats-grid"
+        >
+          {STATS.map(({ value, label }) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4 }}
+              style={{
+                background: "#FFFFFF",
+                padding: "2rem 1.5rem",
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "2rem",
+                  fontWeight: 800,
+                  color: "#B22222",
+                  marginBottom: "0.375rem",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {value}
+              </div>
+              <div style={{ fontSize: "0.75rem", color: "#757575", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                {label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       <style>{`
         @media (max-width: 768px) {
           .overview-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+          .benefits-grid { grid-template-columns: 1fr 1fr !important; }
+          .stats-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .benefits-grid { grid-template-columns: 1fr !important; }
+          .stats-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

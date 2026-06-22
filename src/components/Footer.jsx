@@ -5,8 +5,8 @@ import { solutions } from "@/data/products";
 const CONTACT = [
   {
     label: "Email",
-    value: "info@can-india.co.in",
-    href: "mailto:info@can-india.co.in",
+    value: "sales@can-india.co.in",
+    href: "mailto:sales@can-india.co.in",
     icon: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -16,8 +16,18 @@ const CONTACT = [
   },
   {
     label: "Phone",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210",
+    value: "+91 90877 44900",
+    href: "tel:+919087744900",
+    icon: (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Phone 2",
+    value: "+91 90877 44600",
+    href: "tel:+919087744600",
     icon: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -26,7 +36,7 @@ const CONTACT = [
   },
   {
     label: "Location",
-    value: "Hyderabad, Telangana, India",
+    value: "96-A, 1st Floor, Bharathi Colony, Peelamedu, Coimbatore - 641004",
     icon: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -36,8 +46,8 @@ const CONTACT = [
   },
   {
     label: "Website",
-    value: "www.can-india.co.in",
-    href: "https://www.can-india.co.in",
+    value: "can-india.co.in",
+    href: "https://can-india.co.in",
     icon: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -45,6 +55,27 @@ const CONTACT = [
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
+  },
+];
+
+const CHANNEL_PARTNERS = [
+  {
+    city: "Chennai",
+    phone: "+91 99623 84650",
+    address: "1st Floor, MIG 714, TNHB, Tiruvallur, Chennai - 602002. Above Aarti Scans and Labs.",
+  },
+  {
+    city: "Bangalore",
+    phone: "+91 77602 61706",
+    address: "No. 16, First Floor, 7th Main, 80 Feet Road, Kalyan Nagar, Bangalore - 560043, Karnataka",
+  },
+];
+
+const GLOBAL_PARTNERS = [
+  {
+    region: "Bahrain",
+    phone: "+973 3214 7070 / +973 351 351 25",
+    address: "Flat / Shop No. 104, Building 9B, Avenue 6, Block 603, Mahazzah, Sitra, Kingdom of Bahrain.",
   },
 ];
 
@@ -74,7 +105,7 @@ export default function Footer({ onContactClick }) {
         >
           <div>
             <p style={{ fontSize: "1.05rem", fontWeight: 700, color: "#FFFFFF", letterSpacing: "-0.01em", marginBottom: "0.25rem" }}>
-              Ready to Transform Your Business?
+              Let's Build the Future Together
             </p>
             <p style={{ fontSize: "0.8rem", color: "#94A3B8" }}>
               Speak to our team and explore the right solution for your organisation.
@@ -155,17 +186,17 @@ export default function Footer({ onContactClick }) {
               </svg>
             </div>
             <div>
-              <div style={{ fontSize: "0.88rem", fontWeight: 800, color: "#FFFFFF", letterSpacing: "0.04em" }}>CANOROUS</div>
-              <div style={{ fontSize: "0.55rem", fontWeight: 500, color: "#64748B", letterSpacing: "0.16em", textTransform: "uppercase" }}>Technologies</div>
+              <div style={{ fontSize: "0.88rem", fontWeight: 800, color: "#FFFFFF", letterSpacing: "0.04em" }}>TPL</div>
+              <div style={{ fontSize: "0.55rem", fontWeight: 500, color: "#64748B", letterSpacing: "0.16em", textTransform: "uppercase" }}>Unit of Canorous Technologies</div>
             </div>
           </div>
 
           <p style={{ fontSize: "0.75rem", fontWeight: 600, color: "#B22222", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "1rem" }}>
-            AI Powered Engineering Intelligence
+            AI Powered Engineering Intelligence. Visualized.
           </p>
 
           <p style={{ fontSize: "0.8rem", color: "#94A3B8", lineHeight: 1.75, maxWidth: "320px" }}>
-            Canorous Technologies delivers AI-powered engineering intelligence, enterprise software solutions, automation platforms, and immersive digital experiences that help organizations innovate faster and operate smarter.
+            TPL delivers AI-powered engineering intelligence, immersive visualization, intelligent automation, and full-stack software solutions that help industries design, build, and operate smarter.
           </p>
         </div>
 
@@ -218,6 +249,68 @@ export default function Footer({ onContactClick }) {
         </div>
       </div>
 
+      {/* Channel Partners */}
+      <div style={{ borderTop: "1px solid #1E2D4A" }}>
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "2.5rem 2rem",
+          }}
+        >
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "1.5rem" }}>
+            Our Channel Partners
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "2rem",
+            }}
+            className="partners-grid"
+          >
+            {CHANNEL_PARTNERS.map(({ city, phone, address }) => (
+              <div key={city}>
+                <p style={{ fontSize: "0.8rem", fontWeight: 700, color: "#B22222", marginBottom: "0.5rem" }}>{city}</p>
+                <p style={{ fontSize: "0.75rem", color: "#94A3B8", marginBottom: "0.25rem" }}>{phone}</p>
+                <p style={{ fontSize: "0.72rem", color: "#64748B", lineHeight: 1.5 }}>{address}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Global Partners */}
+      <div style={{ borderTop: "1px solid #1E2D4A" }}>
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "2.5rem 2rem",
+          }}
+        >
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "1.5rem" }}>
+            Global Partners
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "2rem",
+            }}
+            className="partners-grid"
+          >
+            {GLOBAL_PARTNERS.map(({ region, phone, address }) => (
+              <div key={region}>
+                <p style={{ fontSize: "0.8rem", fontWeight: 700, color: "#B22222", marginBottom: "0.5rem" }}>{region}</p>
+                <p style={{ fontSize: "0.75rem", color: "#94A3B8", marginBottom: "0.25rem" }}>{phone}</p>
+                <p style={{ fontSize: "0.72rem", color: "#64748B", lineHeight: 1.5 }}>{address}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Copyright bar */}
       <div style={{ borderTop: "1px solid #1E2D4A" }}>
         <div
@@ -233,10 +326,10 @@ export default function Footer({ onContactClick }) {
           }}
         >
           <p style={{ fontSize: "0.72rem", color: "#475569" }}>
-            © {new Date().getFullYear()} Canorous Technologies Pvt. Ltd. All Rights Reserved.
+            © {new Date().getFullYear()} TPL · Canorous Technologies. All Rights Reserved.
           </p>
           <p style={{ fontSize: "0.72rem", color: "#475569" }}>
-            AI Powered Engineering Intelligence
+            AI Powered Engineering Intelligence. Visualized.
           </p>
         </div>
       </div>
@@ -244,6 +337,7 @@ export default function Footer({ onContactClick }) {
       <style>{`
         @media (max-width: 900px) {
           .footer-cols { grid-template-columns: 1fr 1fr !important; }
+          .partners-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 600px) {
           .footer-cols { grid-template-columns: 1fr !important; }

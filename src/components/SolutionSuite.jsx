@@ -5,23 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { solutions } from "@/data/products";
 
 const ICONS = {
-  GraduationCap: (
+  Building: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-      <path d="M6 12v5c3 3 9 3 12 0v-5" />
-    </svg>
-  ),
-  Briefcase: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="7" width="20" height="14" rx="2" />
-      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-      <path d="M2 12h20" />
-    </svg>
-  ),
-  HeartPulse: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z" />
-      <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+      <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+      <path d="M9 22v-4h6v4" />
+      <path d="M8 6h.01" /><path d="M16 6h.01" />
+      <path d="M12 6h.01" /><path d="M12 10h.01" />
+      <path d="M12 14h.01" /><path d="M16 10h.01" />
+      <path d="M16 14h.01" /><path d="M8 10h.01" />
+      <path d="M8 14h.01" />
     </svg>
   ),
   BrainCircuit: (
@@ -38,26 +30,24 @@ const ICONS = {
       <path d="M12 6v4M6 12h4M14 12h4M12 14v4" />
     </svg>
   ),
-  Smartphone: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="5" y="2" width="14" height="20" rx="2" />
-      <line x1="12" y1="18" x2="12.01" y2="18" />
-    </svg>
-  ),
   Code: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="16 18 22 12 16 6" />
       <polyline points="8 6 2 12 8 18" />
     </svg>
   ),
-  Cloud: (
+  Factory: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+      <path d="M2 20V8l5 4V8l5 4V4h10v16z" />
+      <path d="M6 20v-4h4v4" />
+      <path d="M14 20v-4h4v4" />
     </svg>
   ),
-  Zap: (
+  HardHat: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z" />
+      <path d="M10 18V6a2 2 0 0 1 4 0v12" />
+      <path d="M4 18v-4a8 8 0 0 1 16 0v4" />
     </svg>
   ),
 };
@@ -256,7 +246,7 @@ export default function SolutionSuite({ onContactClick }) {
         <div style={{ marginBottom: "2.5rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
             <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            <span className="section-label">Canorous Technologies</span>
+            <span className="section-label">TPL · End-to-End Solutions Across Industries</span>
           </div>
           <h2
             style={{
@@ -270,7 +260,7 @@ export default function SolutionSuite({ onContactClick }) {
             Our Solution Suite
           </h2>
           <p style={{ fontSize: "0.88rem", color: "#757575", maxWidth: "520px" }}>
-            Select a solution below to explore its capabilities and key features.
+            Explore our comprehensive suite of AI-powered solutions designed to transform how industries visualize, simulate, and automate.
           </p>
         </div>
 

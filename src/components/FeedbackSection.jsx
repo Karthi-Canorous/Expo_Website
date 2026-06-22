@@ -50,7 +50,7 @@ export default function FeedbackSection({ userData, onSubmitFeedback }) {
           </h2>
           <p style={{ fontSize: "0.88rem", color: "#757575" }}>
             Hello{userData?.name ? ` ${userData.name.split(" ")[0]}` : ""}, we would love to hear your thoughts on
-            the Canorous Technologies Solution Suite.
+            the TPL Solution Suite.
           </p>
         </div>
 

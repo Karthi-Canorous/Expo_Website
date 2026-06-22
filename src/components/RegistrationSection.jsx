@@ -100,7 +100,7 @@ export default function RegistrationSection({ onSubmit }) {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
             <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            <span className="section-label">Welcome to CTPL</span>
+            <span className="section-label">TPL · Unit of Canorous Technologies</span>
           </div>
 
           <h1
@@ -117,7 +117,9 @@ export default function RegistrationSection({ onSubmit }) {
             <br />
             <span style={{ color: "#B22222" }}>Engineering</span>
             <br />
-            Intelligence
+            Intelligence.
+            <br />
+            <span style={{ color: "#B22222" }}>Visualized.</span>
           </h1>
 
           <p
@@ -129,42 +131,32 @@ export default function RegistrationSection({ onSubmit }) {
               maxWidth: "440px",
             }}
           >
-            Canorous Technologies delivers immersive visualization, intelligent
-            automation, and AI‑driven engineering solutions that transform how
-            industries design, build, and operate.
+            One Partner for Visualization, Simulation &amp; Automation for a Smarter Future.
+            Delivering AR, VR, AI Agents, Digital Twins, Software, MEP, and Industrial Training solutions.
           </p>
 
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.625rem",
               marginBottom: "2.5rem",
             }}
           >
-            {[
-              { icon: "◈", label: "3D Visualization" },
-              { icon: "◎", label: "VR / AR Training" },
-              { icon: "◆", label: "AI Agents" },
-              { icon: "◉", label: "MEP Intelligence" },
-              { icon: "⬡", label: "Digital Twins" },
-              { icon: "◍", label: "CAD Automation" },
-            ].map(({ icon, label }) => (
+            {["AR", "VR", "AI Agents", "Digital Twins", "Software", "MEP", "Industrial Training"].map((tag) => (
               <div
-                key={label}
+                key={tag}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.625rem",
-                  padding: "0.625rem 0.875rem",
-                  border: "1px solid #EFEFEF",
+                  padding: "0.5rem 1rem",
+                  border: "1px solid #D9D9D9",
                   background: "#F7F7F7",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "#1C1C1C",
+                  letterSpacing: "0.02em",
                 }}
               >
-                <span style={{ fontSize: "0.9rem", color: "#B22222" }}>{icon}</span>
-                <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#1C1C1C" }}>
-                  {label}
-                </span>
+                {tag}
               </div>
             ))}
           </div>
@@ -175,7 +167,7 @@ export default function RegistrationSection({ onSubmit }) {
               a smarter, more efficient future."
             </p>
             <p style={{ fontSize: "0.72rem", fontWeight: 700, color: "#B22222", marginTop: "0.5rem", letterSpacing: "0.06em" }}>
-              — CANOROUS TECHNOLOGIES
+              — TPL · CANOROUS TECHNOLOGIES
             </p>
           </div>
         </motion.div>
@@ -208,8 +200,8 @@ export default function RegistrationSection({ onSubmit }) {
                 Access the Solution Suite
               </h2>
               <p style={{ fontSize: "0.82rem", color: "#757575" }}>
-                Register below to explore Canorous Technologies' full range of
-                engineering intelligence solutions.
+                Register below to explore TPL's full range of
+                AI-powered engineering intelligence solutions.
               </p>
             </div>
 
