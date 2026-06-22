@@ -376,12 +376,3 @@ export const solutions = [
     ],
   },
 ];
-
-export const industries = [
-  "Education",
-  "Healthcare",
-  "Enterprise",
-  "Manufacturing",
-  "Retail",
-  "Infrastructure",
-];
