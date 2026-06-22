@@ -79,11 +79,12 @@ const GLOBAL_PARTNERS = [
   },
 ];
 
-export default function Footer({ onContactClick, onFooterContactClick }) {
+export default function Footer({ onContactClick, onFooterContactClick, isRegistered }) {
   return (
     <footer style={{ background: "#0F172A", borderTop: "1px solid #1E2D4A" }}>
 
-      {/* CTA band */}
+      {/* CTA band — only after registration */}
+      {isRegistered && (
       <div
         style={{
           borderBottom: "1px solid #1E2D4A",
@@ -153,8 +154,10 @@ export default function Footer({ onContactClick, onFooterContactClick }) {
           </div>
         </div>
       </div>
+      )}
 
-      {/* Main columns */}
+      {/* Main columns — only after registration */}
+      {isRegistered && (
       <div
         style={{
           maxWidth: "1280px",
@@ -248,8 +251,42 @@ export default function Footer({ onContactClick, onFooterContactClick }) {
           </ul>
         </div>
       </div>
+      )}
+
+      {/* Contact-only section for registration page */}
+      {!isRegistered && (
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "2.5rem 2rem" }}>
+        <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "1rem" }}>
+          {CONTACT.map(({ label, value, href, icon }) => (
+            <li key={label} style={{ display: "flex", alignItems: "flex-start", gap: "0.625rem" }}>
+              <span style={{ color: "#B22222", flexShrink: 0, marginTop: "1px" }}>{icon}</span>
+              <div>
+                <div style={{ fontSize: "0.6rem", fontWeight: 600, color: "#475569", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.125rem" }}>
+                  {label}
+                </div>
+                {href ? (
+                  <a
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    style={{ fontSize: "0.78rem", color: "#94A3B8", textDecoration: "none", transition: "color 0.15s" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#94A3B8")}
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <span style={{ fontSize: "0.78rem", color: "#94A3B8" }}>{value}</span>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      )}
 
       {/* Channel Partners */}
+      {isRegistered && (
       <div style={{ borderTop: "1px solid #1E2D4A" }}>
         <div
           style={{
@@ -279,8 +316,10 @@ export default function Footer({ onContactClick, onFooterContactClick }) {
           </div>
         </div>
       </div>
+      )}
 
       {/* Global Partners */}
+      {isRegistered && (
       <div style={{ borderTop: "1px solid #1E2D4A" }}>
         <div
           style={{
@@ -310,8 +349,10 @@ export default function Footer({ onContactClick, onFooterContactClick }) {
           </div>
         </div>
       </div>
+      )}
 
       {/* Copyright bar */}
+      {isRegistered && (
       <div style={{ borderTop: "1px solid #1E2D4A" }}>
         <div
           style={{
@@ -333,6 +374,7 @@ export default function Footer({ onContactClick, onFooterContactClick }) {
           </p>
         </div>
       </div>
+      )}
 
       <style>{`
         @media (max-width: 900px) {

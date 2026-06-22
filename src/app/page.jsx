@@ -66,8 +66,8 @@ function FeedbackSuccess() {
 
       <div
         style={{
-          marginTop: "2rem",
-          paddingTop: "1.5rem",
+          marginTop: "0.2rem",
+          paddingTop: "0.2rem",
           borderTop: "1px solid #EFEFEF",
         }}
       >
@@ -191,7 +191,7 @@ function AppContent() {
       )}
 
       {/* Footer — always visible regardless of registration or feedback state */}
-      <Footer onContactClick={scrollToContact} onFooterContactClick={scrollToContact} />
+      <Footer onContactClick={scrollToContact} onFooterContactClick={scrollToContact} isRegistered={isRegistered} />
     </main>
   );
 }

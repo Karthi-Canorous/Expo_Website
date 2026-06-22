@@ -74,9 +74,9 @@ export default function RegistrationSection({ onSubmit }) {
       style={{
         minHeight: "100vh",
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         background: "#FFFFFF",
-        paddingTop: "64px",
+        paddingTop: "0",
       }}
     >
       <div
@@ -84,10 +84,10 @@ export default function RegistrationSection({ onSubmit }) {
           maxWidth: "1280px",
           margin: "0 auto",
           width: "100%",
-          padding: "4rem 2rem",
+          padding: "0 2rem",
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: "6rem",
+          gap: "3rem",
           alignItems: "center",
         }}
         className="reg-grid"
@@ -98,9 +98,15 @@ export default function RegistrationSection({ onSubmit }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
-            {/* <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} /> */}
-            <span className="section-label">CTPL · Unit of Canorous Technologies</span>
+          <div className="company-heading" style={{ textAlign: "center", marginBottom: "0.5rem" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem" }}>
+              <div className="heading-line" style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "1.6rem", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", color: "#B22222" }}>CTPL</div>
+                <div style={{ fontSize: "0.8rem", fontWeight: 1000, letterSpacing: "0.1em", color: "#757575", marginTop: "0.25rem" }}>Canorous Technology Private Limited</div>
+              </div>
+              <div className="heading-line" style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
+            </div>
           </div>
 
           <h1
@@ -109,19 +115,16 @@ export default function RegistrationSection({ onSubmit }) {
               fontWeight: 800,
               color: "#0F172A",
               lineHeight: 1.15,
-              marginBottom: "1.5rem"
+              marginBottom: "0.5rem"
             }}
           >
-            AI Powered
-            <br />
-            <span style={{ color: "#B22222" }}>Engineering</span>
-            <br />
-            Intelligence.
-            <br />
-            <span style={{ color: "#B22222" }}>Visualized.</span>
+            <span style={{ display: "block", paddingLeft: "0" }}>AI Powered</span>
+            <span style={{ display: "block", paddingLeft: "5rem", color: "#B22222" }}>Engineering</span>
+            <span style={{ display: "block", paddingLeft: "0" }}>Intelligence.</span>
+            <span style={{ display: "block", paddingLeft: "5rem", color: "#B22222" }}>Visualized.</span>
           </h1>
 
-          <p
+          {/* <p
             style={{
               fontSize: "0.95rem",
               color: "#4A4A4A",
@@ -132,14 +135,14 @@ export default function RegistrationSection({ onSubmit }) {
           >
             One Partner for Visualization, Simulation &amp; Automation for a Smarter Future.
             Delivering AR, VR, AI Agents, Digital Twins, Software, MEP, and Industrial Training solutions.
-          </p>
+          </p> */}
 
           <div
             style={{
               display: "flex",
               flexWrap: "wrap",
               gap: "0.625rem",
-              marginBottom: "2.5rem",
+              marginBottom: "0.5rem",
             }}
           >
             {/* {[].map((tag) => (
