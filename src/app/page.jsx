@@ -1,14 +1,13 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AppProvider, useApp } from "@/context/AppContext";
-import Navbar from "@/components/Navbar";
 import RegistrationSection from "@/components/RegistrationSection";
 import SolutionSuite from "@/components/SolutionSuite";
 import CompanyOverview from "@/components/CompanyOverview";
 import FeedbackSection from "@/components/FeedbackSection";
-import ContactInfo from "@/components/ContactInfo";
+import Footer from "@/components/Footer";
 
 function FeedbackSuccess() {
   return (
@@ -82,11 +81,8 @@ function FeedbackSuccess() {
 
 function AppContent() {
   const { isRegistered, isFeedbackSubmitted, userData, hydrated, register, submitFeedback } = useApp();
-  const solutionsRef = useRef(null);
   const overviewRef = useRef(null);
   const feedbackRef = useRef(null);
-  const contactRef = useRef(null);
-  const [requestedSlug, setRequestedSlug] = useState(null);
 
   useEffect(() => {
     if (isRegistered && overviewRef.current) {
@@ -97,30 +93,8 @@ function AppContent() {
     }
   }, [isRegistered]);
 
-  useEffect(() => {
-    if (isFeedbackSubmitted && contactRef.current) {
-      const timer = setTimeout(() => {
-        contactRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 400);
-      return () => clearTimeout(timer);
-    }
-  }, [isFeedbackSubmitted]);
-
-  const scrollToSolutions = () => {
-    solutionsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const scrollToOverview = () => {
-    overviewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   const scrollToFeedback = () => {
     feedbackRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const handleSolutionSelect = (slug) => {
-    setRequestedSlug(slug);
-    solutionsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   if (!hydrated) {
@@ -150,87 +124,64 @@ function AppContent() {
   }
 
   return (
-    <>
-      <Navbar
-        isRegistered={isRegistered}
-        onSolutionsClick={scrollToSolutions}
-        onOverviewClick={scrollToOverview}
-        onSolutionSelect={handleSolutionSelect}
-      />
-
-      <main>
-        {/* ── Section 1: Registration ─────────────────────── */}
-        <AnimatePresence>
-          {!isRegistered && (
-            <motion.div
-              key="registration"
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35 }}
-            >
-              <RegistrationSection onSubmit={register} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* ── Sections 2–6: Revealed after registration ──── */}
-        {isRegistered && (
+    <main>
+      {/* ── Section 1: Registration ─────────────────────── */}
+      <AnimatePresence>
+        {!isRegistered && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            key="registration"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35 }}
           >
-            {/* Section 2 — Company Overview */}
-            <div ref={overviewRef} style={{ scrollMarginTop: "64px" }}>
-              <CompanyOverview />
-            </div>
-
-            {/* Section 3 — Our Solution Suite */}
-            <div ref={solutionsRef} style={{ scrollMarginTop: "64px" }}>
-              <SolutionSuite requestedSlug={requestedSlug} onContactClick={scrollToFeedback} />
-            </div>
-
-            {/* Section 4/5 — Feedback → Success */}
-            <div ref={feedbackRef} style={{ scrollMarginTop: "64px" }}>
-              {!isFeedbackSubmitted ? (
-                <FeedbackSection userData={userData} onSubmitFeedback={submitFeedback} />
-              ) : (
-                <section
-                  style={{
-                    background: "#FFFFFF",
-                    borderTop: "1px solid #EFEFEF",
-                    padding: "5rem 0",
-                  }}
-                >
-                  <div style={{ maxWidth: "760px", margin: "0 auto", padding: "0 2rem" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
-                      <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-                      <span className="section-label">Feedback Received</span>
-                    </div>
-                    <FeedbackSuccess />
-                  </div>
-                </section>
-              )}
-            </div>
-
-            {/* Section 6 — Contact Information (post-feedback only) */}
-            <AnimatePresence>
-              {isFeedbackSubmitted && (
-                <motion.div
-                  key="contact"
-                  ref={contactRef}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
-                  style={{ scrollMarginTop: "64px" }}
-                >
-                  <ContactInfo />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <RegistrationSection onSubmit={register} />
           </motion.div>
         )}
-      </main>
-    </>
+      </AnimatePresence>
+
+      {/* ── Sections 2–5: Revealed after registration ──── */}
+      {isRegistered && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Section 2 — Company Overview */}
+          <div ref={overviewRef}>
+            <CompanyOverview />
+          </div>
+
+          {/* Section 3 — Our Solution Suite */}
+          <SolutionSuite onContactClick={scrollToFeedback} />
+
+          {/* Section 4 — Feedback → Success */}
+          <div ref={feedbackRef}>
+            {!isFeedbackSubmitted ? (
+              <FeedbackSection userData={userData} onSubmitFeedback={submitFeedback} />
+            ) : (
+              <section
+                style={{
+                  background: "#FFFFFF",
+                  borderTop: "1px solid #EFEFEF",
+                  padding: "5rem 0",
+                }}
+              >
+                <div style={{ maxWidth: "760px", margin: "0 auto", padding: "0 2rem" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
+                    <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
+                    <span className="section-label">Feedback Received</span>
+                  </div>
+                  <FeedbackSuccess />
+                </div>
+              </section>
+            )}
+          </div>
+
+        </motion.div>
+      )}
+
+      {/* Footer — always visible regardless of registration or feedback state */}
+      <Footer onContactClick={scrollToFeedback} />
+    </main>
   );
 }
 

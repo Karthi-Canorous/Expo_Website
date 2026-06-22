@@ -6,13 +6,40 @@ import { motion } from "framer-motion";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MOBILE_RE = /^[6-9]\d{9}$/;
 
+function Field({ id, label, type = "text", placeholder, value, error, onChange, disabled }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+      <label
+        htmlFor={id}
+        style={{
+          fontSize: "0.72rem",
+          fontWeight: 600,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          color: "#4A4A4A",
+        }}
+      >
+        {label} <span style={{ color: "#B22222" }}>*</span>
+      </label>
+      <input
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="input-enterprise"
+        style={error ? { borderColor: "#B22222" } : {}}
+        disabled={disabled}
+      />
+      {error && (
+        <span style={{ fontSize: "0.72rem", color: "#B22222" }}>{error}</span>
+      )}
+    </div>
+  );
+}
+
 export default function RegistrationSection({ onSubmit }) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    company: "",
-  });
+  const [form, setForm] = useState({ name: "", email: "", mobile: "", company: "" });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -41,36 +68,6 @@ export default function RegistrationSection({ onSubmit }) {
     await new Promise((r) => setTimeout(r, 1000));
     onSubmit(form);
   }
-
-  const Field = ({ id, label, type = "text", placeholder }) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
-      <label
-        htmlFor={id}
-        style={{
-          fontSize: "0.72rem",
-          fontWeight: 600,
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
-          color: "#4A4A4A",
-        }}
-      >
-        {label} <span style={{ color: "#B22222" }}>*</span>
-      </label>
-      <input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        value={form[id]}
-        onChange={handleChange(id)}
-        className="input-enterprise"
-        style={errors[id] ? { borderColor: "#B22222" } : {}}
-        disabled={submitting}
-      />
-      {errors[id] && (
-        <span style={{ fontSize: "0.72rem", color: "#B22222" }}>{errors[id]}</span>
-      )}
-    </div>
-  );
 
   return (
     <section
@@ -101,7 +98,6 @@ export default function RegistrationSection({ onSubmit }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          {/* Section label */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
             <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
             <span className="section-label">Welcome to CTPL</span>
@@ -138,7 +134,6 @@ export default function RegistrationSection({ onSubmit }) {
             industries design, build, and operate.
           </p>
 
-          {/* Capability pillars */}
           <div
             style={{
               display: "grid",
@@ -174,13 +169,7 @@ export default function RegistrationSection({ onSubmit }) {
             ))}
           </div>
 
-          {/* Accent strip */}
-          <div
-            style={{
-              borderLeft: "3px solid #B22222",
-              paddingLeft: "1rem",
-            }}
-          >
+          <div style={{ borderLeft: "3px solid #B22222", paddingLeft: "1rem" }}>
             <p style={{ fontSize: "0.82rem", color: "#757575", lineHeight: 1.65 }}>
               "One partner for Visualization, Simulation &amp; Automation — for
               a smarter, more efficient future."
@@ -205,16 +194,8 @@ export default function RegistrationSection({ onSubmit }) {
               boxShadow: "0 4px 32px rgba(0,0,0,0.06)",
             }}
           >
-            {/* Form header */}
             <div style={{ marginBottom: "2rem" }}>
-              <div
-                style={{
-                  width: "3px",
-                  height: "28px",
-                  background: "#B22222",
-                  marginBottom: "1rem",
-                }}
-              />
+              <div style={{ width: "3px", height: "28px", background: "#B22222", marginBottom: "1rem" }} />
               <h2
                 style={{
                   fontSize: "1.2rem",
@@ -233,10 +214,44 @@ export default function RegistrationSection({ onSubmit }) {
             </div>
 
             <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              <Field id="name" label="Full Name" placeholder="John Doe" />
-              <Field id="email" label="Email Address" type="email" placeholder="john@company.com" />
-              <Field id="mobile" label="Mobile Number" type="tel" placeholder="9876543210" />
-              <Field id="company" label="Company Name" placeholder="Acme Engineering Ltd." />
+              <Field
+                id="name"
+                label="Full Name"
+                placeholder="John Doe"
+                value={form.name}
+                error={errors.name}
+                onChange={handleChange("name")}
+                disabled={submitting}
+              />
+              <Field
+                id="email"
+                label="Email Address"
+                type="email"
+                placeholder="john@company.com"
+                value={form.email}
+                error={errors.email}
+                onChange={handleChange("email")}
+                disabled={submitting}
+              />
+              <Field
+                id="mobile"
+                label="Mobile Number"
+                type="tel"
+                placeholder="9876543210"
+                value={form.mobile}
+                error={errors.mobile}
+                onChange={handleChange("mobile")}
+                disabled={submitting}
+              />
+              <Field
+                id="company"
+                label="Company Name"
+                placeholder="Acme Engineering Ltd."
+                value={form.company}
+                error={errors.company}
+                onChange={handleChange("company")}
+                disabled={submitting}
+              />
 
               <div style={{ paddingTop: "0.5rem" }}>
                 <button
@@ -279,10 +294,7 @@ export default function RegistrationSection({ onSubmit }) {
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
         @media (max-width: 768px) {
-          .reg-grid {
-            grid-template-columns: 1fr !important;
-            gap: 3rem !important;
-          }
+          .reg-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
         }
       `}</style>
     </section>

@@ -71,13 +71,7 @@ const CheckIcon = () => (
 
 function SolutionDetail({ solution, onContactClick }) {
   return (
-    <motion.div
-      key={solution.slug}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
+    <div>
       {/* Header: icon + title + short description */}
       <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", marginBottom: "1.5rem" }}>
         <div
@@ -221,21 +215,15 @@ function SolutionDetail({ solution, onContactClick }) {
           .features-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-    </motion.div>
+    </div>
   );
 }
 
-export default function SolutionSuite({ requestedSlug, onContactClick }) {
-  const [activeSlug, setActiveSlug] = useState(solutions[0].slug);
+export default function SolutionSuite({ onContactClick }) {
+  const [activeSlug, setActiveSlug] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const activeSolution = solutions.find((s) => s.slug === activeSlug);
-
-  useEffect(() => {
-    if (requestedSlug && solutions.some((s) => s.slug === requestedSlug)) {
-      setActiveSlug(requestedSlug);
-    }
-  }, [requestedSlug]);
+  const activeSolution = solutions.find((s) => s.slug === activeSlug) ?? null;
 
   useEffect(() => {
     if (!dropdownOpen) return;
@@ -305,29 +293,31 @@ export default function SolutionSuite({ requestedSlug, onContactClick }) {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <div
-                style={{
-                  width: "28px",
-                  height: "28px",
-                  background: "#B22222",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#FFFFFF",
-                  flexShrink: 0,
-                }}
-              >
-                {ICONS[activeSolution.icon]}
-              </div>
+              {activeSolution && (
+                <div
+                  style={{
+                    width: "28px",
+                    height: "28px",
+                    background: "#B22222",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#FFFFFF",
+                    flexShrink: 0,
+                  }}
+                >
+                  {ICONS[activeSolution.icon]}
+                </div>
+              )}
               <span
                 style={{
                   fontSize: "0.88rem",
-                  fontWeight: 700,
-                  color: "#0F172A",
+                  fontWeight: activeSolution ? 700 : 400,
+                  color: activeSolution ? "#0F172A" : "#9A9A9A",
                   letterSpacing: "-0.01em",
                 }}
               >
-                {activeSolution.title}
+                {activeSolution ? activeSolution.title : "Select a Solution"}
               </span>
             </div>
             <svg
@@ -422,23 +412,44 @@ export default function SolutionSuite({ requestedSlug, onContactClick }) {
           </AnimatePresence>
         </div>
 
-        {/* Detail panel */}
-        <div
-          style={{
-            background: "#FFFFFF",
-            border: "1px solid #D9D9D9",
-            padding: "2.5rem",
-            boxShadow: "0 1px 6px rgba(0,0,0,0.04)",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <SolutionDetail
+        {/* Detail panel — only shown after a solution is selected */}
+        <AnimatePresence mode="wait">
+          {activeSolution ? (
+            <motion.div
               key={activeSlug}
-              solution={activeSolution}
-              onContactClick={onContactClick}
-            />
-          </AnimatePresence>
-        </div>
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid #D9D9D9",
+                padding: "2.5rem",
+                boxShadow: "0 1px 6px rgba(0,0,0,0.04)",
+              }}
+            >
+              <SolutionDetail
+                solution={activeSolution}
+                onContactClick={onContactClick}
+              />
+            </motion.div>
+          ) : (
+            <motion.p
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{
+                fontSize: "0.85rem",
+                color: "#9A9A9A",
+                marginTop: "0.5rem",
+              }}
+            >
+              Choose a solution to explore its capabilities and features.
+            </motion.p>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>
