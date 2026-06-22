@@ -27,16 +27,13 @@ export default function FeedbackSection({ userData, onSubmitFeedback }) {
       style={{
         background: "#FFFFFF",
         borderTop: "1px solid #EFEFEF",
-        padding: "5rem 0",
+        padding: "2rem 0 5rem",
       }}
     >
       <div style={{ maxWidth: "760px", margin: "0 auto", padding: "0 2rem" }}>
         {/* Header */}
         <div style={{ marginBottom: "2.5rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-            <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            <span className="section-label">Your Opinion Matters</span>
-          </div>
+          <span style={{ fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#B22222", marginBottom: "1rem", display: "block" }}>Your Opinion Matters</span>
           <h2
             style={{
               fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
@@ -50,7 +47,7 @@ export default function FeedbackSection({ userData, onSubmitFeedback }) {
           </h2>
           <p style={{ fontSize: "0.88rem", color: "#757575" }}>
             Hello{userData?.name ? ` ${userData.name.split(" ")[0]}` : ""}, we would love to hear your thoughts on
-            the TPL Solution Suite.
+            the CTPL Solution Suite.
           </p>
         </div>
 

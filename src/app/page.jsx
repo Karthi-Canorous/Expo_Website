@@ -83,6 +83,7 @@ function AppContent() {
   const { isRegistered, isFeedbackSubmitted, userData, hydrated, register, submitFeedback } = useApp();
   const overviewRef = useRef(null);
   const feedbackRef = useRef(null);
+  const registerRef = useRef(null);
 
   useEffect(() => {
     if (isRegistered && overviewRef.current) {
@@ -94,7 +95,15 @@ function AppContent() {
   }, [isRegistered]);
 
   const scrollToFeedback = () => {
-    feedbackRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (isRegistered && feedbackRef.current) {
+      feedbackRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (registerRef.current) {
+      registerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const scrollToContact = () => {
+    document.getElementById("footer-contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   if (!hydrated) {
@@ -133,7 +142,9 @@ function AppContent() {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.35 }}
           >
-            <RegistrationSection onSubmit={register} />
+            <div ref={registerRef}>
+              <RegistrationSection onSubmit={register} />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -151,7 +162,7 @@ function AppContent() {
           </div>
 
           {/* Section 3 — Our Solution Suite */}
-          <SolutionSuite onContactClick={scrollToFeedback} />
+          <SolutionSuite onContactClick={scrollToContact} onFooterContactClick={scrollToContact} />
 
           {/* Section 4 — Feedback → Success */}
           <div ref={feedbackRef}>
@@ -180,7 +191,7 @@ function AppContent() {
       )}
 
       {/* Footer — always visible regardless of registration or feedback state */}
-      <Footer onContactClick={scrollToFeedback} />
+      <Footer onContactClick={scrollToContact} onFooterContactClick={scrollToContact} />
     </main>
   );
 }

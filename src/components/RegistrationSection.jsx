@@ -99,18 +99,17 @@ export default function RegistrationSection({ onSubmit }) {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
-            <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            <span className="section-label">TPL · Unit of Canorous Technologies</span>
+            {/* <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} /> */}
+            <span className="section-label">CTPL · Unit of Canorous Technologies</span>
           </div>
 
           <h1
             style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontSize: "clamp(2rem, 4.5vw, 3rem)",
               fontWeight: 800,
               color: "#0F172A",
-              lineHeight: 1.12,
-              letterSpacing: "-0.02em",
-              marginBottom: "1.5rem",
+              lineHeight: 1.15,
+              marginBottom: "1.5rem"
             }}
           >
             AI Powered
@@ -143,7 +142,7 @@ export default function RegistrationSection({ onSubmit }) {
               marginBottom: "2.5rem",
             }}
           >
-            {["AR", "VR", "AI Agents", "Digital Twins", "Software", "MEP", "Industrial Training"].map((tag) => (
+            {/* {[].map((tag) => (
               <div
                 key={tag}
                 style={{
@@ -158,7 +157,7 @@ export default function RegistrationSection({ onSubmit }) {
               >
                 {tag}
               </div>
-            ))}
+            ))} */}
           </div>
 
           <div style={{ borderLeft: "3px solid #B22222", paddingLeft: "1rem" }}>
@@ -167,7 +166,7 @@ export default function RegistrationSection({ onSubmit }) {
               a smarter, more efficient future."
             </p>
             <p style={{ fontSize: "0.72rem", fontWeight: 700, color: "#B22222", marginTop: "0.5rem", letterSpacing: "0.06em" }}>
-              — TPL · CANOROUS TECHNOLOGIES
+              — CTPL · CANOROUS TECHNOLOGIES
             </p>
           </div>
         </motion.div>
@@ -187,7 +186,7 @@ export default function RegistrationSection({ onSubmit }) {
             }}
           >
             <div style={{ marginBottom: "2rem" }}>
-              <div style={{ width: "3px", height: "28px", background: "#B22222", marginBottom: "1rem" }} />
+              {/* <div style={{ width: "3px", height: "28px", background: "#B22222", marginBottom: "1rem" }} /> */}
               <h2
                 style={{
                   fontSize: "1.2rem",
@@ -197,10 +196,10 @@ export default function RegistrationSection({ onSubmit }) {
                   marginBottom: "0.375rem",
                 }}
               >
-                Access the Solution Suite
+                Access the Solution Suites
               </h2>
               <p style={{ fontSize: "0.82rem", color: "#757575" }}>
-                Register below to explore TPL's full range of
+                Register below to explore CTPL's full range of
                 AI-powered engineering intelligence solutions.
               </p>
             </div>

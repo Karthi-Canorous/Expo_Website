@@ -59,7 +59,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-function SolutionDetail({ solution, onContactClick }) {
+function SolutionDetail({ solution, onContactClick, onFooterContactClick }) {
   return (
     <div>
       {/* Header: icon + title + short description */}
@@ -174,7 +174,7 @@ function SolutionDetail({ solution, onContactClick }) {
           Request Demo
         </button>
         <button
-          onClick={() => onContactClick?.()}
+          onClick={() => onFooterContactClick?.()}
           style={{
             background: "transparent",
             color: "#0F172A",
@@ -209,7 +209,7 @@ function SolutionDetail({ solution, onContactClick }) {
   );
 }
 
-export default function SolutionSuite({ onContactClick }) {
+export default function SolutionSuite({ onContactClick, onFooterContactClick }) {
   const [activeSlug, setActiveSlug] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -237,17 +237,14 @@ export default function SolutionSuite({ onContactClick }) {
       style={{
         background: "#F7F7F7",
         borderTop: "1px solid #EFEFEF",
-        padding: "5rem 0",
+        padding: "2rem 0",
       }}
     >
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2rem" }}>
 
         {/* Section header */}
         <div style={{ marginBottom: "2.5rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-            <div style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            <span className="section-label">TPL · End-to-End Solutions Across Industries</span>
-          </div>
+          <span style={{ fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#B22222", marginBottom: "1rem", display: "block" }}>CTPL · End-to-End Solutions Across Industries</span>
           <h2
             style={{
               fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
@@ -421,6 +418,7 @@ export default function SolutionSuite({ onContactClick }) {
               <SolutionDetail
                 solution={activeSolution}
                 onContactClick={onContactClick}
+                onFooterContactClick={onFooterContactClick}
               />
             </motion.div>
           ) : (

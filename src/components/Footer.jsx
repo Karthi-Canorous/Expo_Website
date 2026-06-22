@@ -79,7 +79,7 @@ const GLOBAL_PARTNERS = [
   },
 ];
 
-export default function Footer({ onContactClick }) {
+export default function Footer({ onContactClick, onFooterContactClick }) {
   return (
     <footer style={{ background: "#0F172A", borderTop: "1px solid #1E2D4A" }}>
 
@@ -132,7 +132,7 @@ export default function Footer({ onContactClick }) {
               Request Demo
             </button>
             <button
-              onClick={() => onContactClick?.()}
+              onClick={() => onFooterContactClick?.()}
               style={{
                 background: "transparent",
                 color: "#E2E8F0",
@@ -186,7 +186,7 @@ export default function Footer({ onContactClick }) {
               </svg>
             </div>
             <div>
-              <div style={{ fontSize: "0.88rem", fontWeight: 800, color: "#FFFFFF", letterSpacing: "0.04em" }}>TPL</div>
+              <div style={{ fontSize: "0.88rem", fontWeight: 800, color: "#FFFFFF", letterSpacing: "0.04em" }}>CTPL</div>
               <div style={{ fontSize: "0.55rem", fontWeight: 500, color: "#64748B", letterSpacing: "0.16em", textTransform: "uppercase" }}>Unit of Canorous Technologies</div>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function Footer({ onContactClick }) {
           </p>
 
           <p style={{ fontSize: "0.8rem", color: "#94A3B8", lineHeight: 1.75, maxWidth: "320px" }}>
-            TPL delivers AI-powered engineering intelligence, immersive visualization, intelligent automation, and full-stack software solutions that help industries design, build, and operate smarter.
+            CTPL delivers AI-powered engineering intelligence, immersive visualization, intelligent automation, and full-stack software solutions that help industries design, build, and operate smarter.
           </p>
         </div>
 
@@ -216,7 +216,7 @@ export default function Footer({ onContactClick }) {
         </div>
 
         {/* Column 3 — Contact */}
-        <div>
+        <div id="footer-contact">
           <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "1.25rem", paddingBottom: "0.625rem", borderBottom: "1px solid #1E2D4A" }}>
             Contact
           </p>
@@ -326,7 +326,7 @@ export default function Footer({ onContactClick }) {
           }}
         >
           <p style={{ fontSize: "0.72rem", color: "#475569" }}>
-            © {new Date().getFullYear()} TPL · Canorous Technologies. All Rights Reserved.
+            © {new Date().getFullYear()} CTPL · Canorous Technologies. All Rights Reserved.
           </p>
           <p style={{ fontSize: "0.72rem", color: "#475569" }}>
             AI Powered Engineering Intelligence. Visualized.

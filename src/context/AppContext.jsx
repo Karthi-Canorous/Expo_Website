@@ -13,7 +13,7 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("tpl_user");
+      const stored = localStorage.getItem("ctpl_user");
       if (stored) {
         const parsed = JSON.parse(stored);
         setUserData(parsed);
@@ -27,7 +27,7 @@ export function AppProvider({ children }) {
     setUserData(data);
     setIsRegistered(true);
     try {
-      localStorage.setItem("tpl_user", JSON.stringify(data));
+      localStorage.setItem("ctpl_user", JSON.stringify(data));
     } catch {}
   }, []);
 
