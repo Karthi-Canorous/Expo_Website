@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #821517;
-  --color-primary-light: #a82023;
-  --color-primary-dark: #5c0f11;
-  --color-secondary: #1A1A2E;
-  --color-accent: #FF6B35;
+  --color-primary: #B22222;
+  --color-primary-dark: #8B1A1A;
+  --color-primary-light: #CC3333;
+  --color-navy: #0F172A;
+  --color-navy-light: #1E2D4A;
+  --color-charcoal: #1C1C1C;
   --color-background: #FFFFFF;
-  --color-card: #F8F8F8;
-  --color-card-hover: #F0F0F0;
+  --color-surface: #F7F7F7;
+  --color-surface-2: #EFEFEF;
   --color-text: #111111;
-  --color-text-muted: #666666;
-  --color-border: #E5E5E5;
-  --color-border-glow: rgba(130, 21, 23, 0.3);
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #757575;
+  --color-border: #D9D9D9;
+  --color-border-strong: #BDBDBD;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -32,115 +34,165 @@
     background-color: var(--color-background);
     color: var(--color-text);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-background);
+    background: #F0F0F0;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--color-primary), var(--color-primary-dark));
-    border-radius: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
   }
 
   ::selection {
-    background: rgba(130, 21, 23, 0.3);
-    color: #111111;
+    background: rgba(178, 34, 34, 0.15);
+    color: var(--color-text);
   }
 }
 
 @layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
   }
 
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+  .divider-red {
+    width: 3rem;
+    height: 3px;
+    background: var(--color-primary);
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, #821517, #FF6B35);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .enterprise-card {
+    background: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .gradient-border {
-    position: relative;
+  .enterprise-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 20px rgba(178, 34, 34, 0.08);
+  }
+
+  .input-enterprise {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 2px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: #FFFFFF;
+    outline: none;
+    transition: border-color 0.15s ease;
+    font-family: var(--font-sans);
+  }
+
+  .input-enterprise::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .input-enterprise:focus {
+    border-color: var(--color-primary);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 2rem;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-family: var(--font-sans);
   }
 
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, #821517, #FF6B35);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
   }
 
-  .glow-red {
-    box-shadow: 0 0 20px rgba(130, 21, 23, 0.3), 0 0 60px rgba(130, 21, 23, 0.1);
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
-  .text-shadow {
-    text-shadow: 0 0 40px rgba(130, 21, 23, 0.4);
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--color-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-primary);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    font-family: var(--font-sans);
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: #FFFFFF;
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(4);
+@keyframes fadeInUp {
+  from {
     opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@layer utilities {
-  .animate-spin-slow {
-    animation: spin-slow 20s linear infinite;
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease forwards;
 }

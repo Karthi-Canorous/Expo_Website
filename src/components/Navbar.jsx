@@ -1,164 +1,302 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import { useFormContext } from "@/context/FormContext";
+import { useState, useEffect, useRef } from "react";
+import { solutions } from "@/data/products";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Solutions", href: "/products" },
-  { label: "Contact Us", href: "/contact" },
-];
-
-export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
-  const { isSubmitted, resetForm } = useFormContext();
+export default function Navbar({ isRegistered, onSolutionsClick, onOverviewClick, onSolutionSelect }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const closeTimer = useRef(null);
+  const solutionsTimer = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMobileOpen(false);
-  }, [pathname]);
+  const cancelClose = () => clearTimeout(closeTimer.current);
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => {
+      setAboutOpen(false);
+      setSolutionsOpen(false);
+    }, 180);
+  };
 
-  const handleNavClick = (e, href) => {
-    if (!isSubmitted && href !== "/") {
-      e.preventDefault();
-      router.push("/");
-    }
+  const cancelSolutionsClose = () => clearTimeout(solutionsTimer.current);
+  const scheduleSolutionsClose = () => {
+    solutionsTimer.current = setTimeout(() => setSolutionsOpen(false), 120);
+  };
+
+  const handleSolutionClick = (slug) => {
+    setAboutOpen(false);
+    setSolutionsOpen(false);
+    onSolutionSelect?.(slug);
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-100" : "bg-white/70 backdrop-blur-sm"
-      }`}
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 200,
+        background: "#FFFFFF",
+        borderBottom: scrolled ? "1px solid #D9D9D9" : "1px solid #EFEFEF",
+        boxShadow: scrolled ? "0 2px 12px rgba(0,0,0,0.06)" : "none",
+        transition: "box-shadow 0.2s ease",
+      }}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:shadow-lg group-hover:shadow-primary/30 transition-shadow duration-300">
-              <span className="text-sm font-black text-white">CTPL</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-lg font-bold tracking-tight gradient-text">CTPL</span>
-              <span className="block text-[10px] text-gray-400 -mt-0.5 tracking-wider">Voice of Canorous</span>
-            </div>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                  pathname === item.href ? "text-primary" : "text-gray-600 hover:text-gray-900"
-                } ${!isSubmitted && item.href !== "/" ? "opacity-50 cursor-not-allowed" : ""}`}
-              >
-                {pathname === item.href && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{item.label}</span>
-              </Link>
-            ))}
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "0 2rem",
+          height: "64px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Logo */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div
+            style={{
+              width: "34px",
+              height: "34px",
+              background: "#B22222",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 17L10 3L17 17" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M5.5 12H14.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
           </div>
-
-          {isSubmitted ? (
-            <div className="hidden md:flex items-center gap-2">
-              <Link
-                href="/contact"
-                className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
-              >
-                Get in Touch
-              </Link>
-              <button
-                onClick={() => { resetForm(); router.push("/"); }}
-                className="px-4 py-2.5 rounded-lg border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-100 transition-all duration-300"
-              >
-                Logout
-              </button>
+          <div>
+            <div
+              style={{
+                fontSize: "0.95rem",
+                fontWeight: 800,
+                color: "#111111",
+                lineHeight: 1.1,
+                letterSpacing: "0.02em",
+              }}
+            >
+              CANOROUS
             </div>
-          ) : (
-            <span className="hidden md:inline-flex px-5 py-2.5 rounded-lg bg-gray-100 text-gray-400 text-sm font-semibold cursor-not-allowed">
-              Get in Touch
-            </span>
-          )}
-
-          <button
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMobileOpen ? <X size={24} className="text-gray-700" /> : <Menu size={24} className="text-gray-700" />}
-          </button>
+            <div
+              style={{
+                fontSize: "0.58rem",
+                fontWeight: 500,
+                color: "#9A9A9A",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+              }}
+            >
+              Technologies
+            </div>
+          </div>
         </div>
-      </nav>
 
-      <AnimatePresence>
-        {isMobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-100 shadow-lg"
-          >
-            <div className="px-4 py-4 space-y-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    pathname === item.href
-                      ? "bg-primary/10 text-primary border-l-2 border-primary"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                  } ${!isSubmitted && item.href !== "/" ? "opacity-50 cursor-not-allowed" : ""}`}
+        {/* Center nav */}
+        <nav style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
+          {isRegistered && (
+            /* About Us — Level 1 dropdown trigger */
+            <div
+              style={{ position: "relative" }}
+              onMouseEnter={() => { cancelClose(); setAboutOpen(true); }}
+              onMouseLeave={scheduleClose}
+            >
+              <button
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: "0.78rem",
+                  fontWeight: 600,
+                  color: aboutOpen ? "#B22222" : "#1C1C1C",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  padding: "0.375rem 0",
+                  borderBottom: `2px solid ${aboutOpen ? "#B22222" : "transparent"}`,
+                  transition: "color 0.15s, border-color 0.15s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                }}
+              >
+                About Us
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  style={{
+                    transform: aboutOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
                 >
-                  {item.label}
-                </Link>
-              ))}
-              {isSubmitted ? (
-                <>
-                  <Link
-                    href="/contact"
-                    className="block px-4 py-3 rounded-lg bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold text-center"
-                  >
-                    Get in Touch
-                  </Link>
+                  <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {/* Level 1 dropdown */}
+              {aboutOpen && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "calc(100% + 10px)",
+                    left: 0,
+                    minWidth: "220px",
+                    background: "#FFFFFF",
+                    border: "1px solid #D9D9D9",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.10)",
+                    zIndex: 300,
+                    animation: "dropFade 0.18s ease",
+                  }}
+                  onMouseEnter={cancelClose}
+                  onMouseLeave={scheduleClose}
+                >
+                  {/* Company Overview */}
                   <button
-                    onClick={() => { resetForm(); router.push("/"); setIsMobileOpen(false); }}
-                    className="block w-full px-4 py-3 rounded-lg border border-gray-200 text-gray-600 text-sm font-medium text-center hover:bg-gray-100 transition-all duration-300"
+                    onClick={() => { setAboutOpen(false); onOverviewClick?.(); }}
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      padding: "0.75rem 1.25rem",
+                      background: "none",
+                      border: "none",
+                      borderBottom: "1px solid #F0F0F0",
+                      textAlign: "left",
+                      fontSize: "0.78rem",
+                      fontWeight: 600,
+                      color: "#1C1C1C",
+                      letterSpacing: "0.04em",
+                      cursor: "pointer",
+                      transition: "background 0.12s, color 0.12s",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "#FDF5F5"; e.currentTarget.style.color = "#B22222"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = "#1C1C1C"; }}
                   >
-                    Logout
+                    Company Overview
                   </button>
-                </>
-              ) : (
-                <span className="block px-4 py-3 rounded-lg bg-gray-100 text-gray-400 text-sm font-semibold text-center cursor-not-allowed">
-                  Get in Touch
-                </span>
+
+                  {/* Our Solution Suite — Level 2 trigger */}
+                  <div
+                    style={{ position: "relative" }}
+                    onMouseEnter={() => { cancelClose(); cancelSolutionsClose(); setSolutionsOpen(true); }}
+                    onMouseLeave={() => { scheduleSolutionsClose(); scheduleClose(); }}
+                  >
+                    <button
+                      onClick={() => { setAboutOpen(false); setSolutionsOpen(false); onSolutionsClick?.(); }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        padding: "0.75rem 1.25rem",
+                        background: solutionsOpen ? "#FDF5F5" : "none",
+                        border: "none",
+                        textAlign: "left",
+                        fontSize: "0.78rem",
+                        fontWeight: 600,
+                        color: solutionsOpen ? "#B22222" : "#1C1C1C",
+                        letterSpacing: "0.04em",
+                        cursor: "pointer",
+                        transition: "background 0.12s, color 0.12s",
+                      }}
+                    >
+                      Our Solution Suite
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                        <path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+
+                    {/* Level 2 sub-dropdown */}
+                    {solutionsOpen && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: "calc(100% + 1px)",
+                          minWidth: "240px",
+                          background: "#FFFFFF",
+                          border: "1px solid #D9D9D9",
+                          boxShadow: "0 8px 32px rgba(0,0,0,0.10)",
+                          zIndex: 400,
+                          animation: "dropFade 0.18s ease",
+                        }}
+                        onMouseEnter={() => { cancelClose(); cancelSolutionsClose(); }}
+                        onMouseLeave={() => { scheduleSolutionsClose(); scheduleClose(); }}
+                      >
+                        {solutions.map((sol, idx) => (
+                          <button
+                            key={sol.slug}
+                            onClick={() => handleSolutionClick(sol.slug)}
+                            style={{
+                              display: "block",
+                              width: "100%",
+                              padding: "0.625rem 1.25rem",
+                              background: "none",
+                              border: "none",
+                              borderBottom: idx < solutions.length - 1 ? "1px solid #F5F5F5" : "none",
+                              textAlign: "left",
+                              fontSize: "0.75rem",
+                              fontWeight: 500,
+                              color: "#1C1C1C",
+                              letterSpacing: "0.02em",
+                              cursor: "pointer",
+                              transition: "background 0.12s, color 0.12s, padding-left 0.12s",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = "#FDF5F5";
+                              e.currentTarget.style.color = "#B22222";
+                              e.currentTarget.style.paddingLeft = "1.5rem";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = "none";
+                              e.currentTarget.style.color = "#1C1C1C";
+                              e.currentTarget.style.paddingLeft = "1.25rem";
+                            }}
+                          >
+                            {sol.title}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+          )}
+        </nav>
+
+        {/* Right tagline */}
+        <div
+          style={{
+            fontSize: "0.68rem",
+            fontWeight: 500,
+            color: "#9A9A9A",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+          }}
+        >
+          <span className="hidden md:inline">AI Powered Engineering Intelligence</span>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes dropFade {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </header>
   );
 }
