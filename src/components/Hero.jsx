@@ -32,10 +32,9 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-[128px] animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-[128px] animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-primary/8 rounded-full blur-[100px] animate-float" style={{ animationDelay: "4s" }} />
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[80px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-accent/8 rounded-full blur-[80px]" />
       </div>
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
