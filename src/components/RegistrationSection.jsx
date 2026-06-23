@@ -6,6 +6,16 @@ import { motion } from "framer-motion";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MOBILE_RE = /^[6-9]\d{9}$/;
 
+const PERSON_TYPE_OPTIONS = [
+  { value: "", label: "Select your role…" },
+  { value: "Customer", label: "Customer" },
+  { value: "Partner / Reseller", label: "Partner / Reseller" },
+  { value: "Distributor", label: "Distributor" },
+  { value: "Consultant", label: "Consultant" },
+  { value: "Student / Academic", label: "Student / Academic" },
+  { value: "Other", label: "Other" },
+];
+
 function Field({ id, label, type = "text", placeholder, value, error, onChange, disabled }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
@@ -38,18 +48,80 @@ function Field({ id, label, type = "text", placeholder, value, error, onChange, 
   );
 }
 
+function SelectField({ id, label, value, error, onChange, disabled, options }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+      <label
+        htmlFor={id}
+        style={{
+          fontSize: "0.72rem",
+          fontWeight: 600,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          color: "#4A4A4A",
+        }}
+      >
+        {label} <span style={{ color: "#B22222" }}>*</span>
+      </label>
+      <select
+        id={id}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        style={{
+          padding: "0.65rem 0.875rem",
+          border: `1px solid ${error ? "#B22222" : "#BDBDBD"}`,
+          borderRadius: "2px",
+          fontSize: "0.88rem",
+          color: value ? "#111111" : "#9A9A9A",
+          background: "#FFFFFF",
+          outline: "none",
+          fontFamily: "inherit",
+          cursor: disabled ? "not-allowed" : "pointer",
+          appearance: "none",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234A4A4A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right 0.875rem center",
+          paddingRight: "2.5rem",
+        }}
+      >
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value} disabled={opt.value === ""}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+      {error && (
+        <span style={{ fontSize: "0.72rem", color: "#B22222" }}>{error}</span>
+      )}
+    </div>
+  );
+}
+
 export default function RegistrationSection({ onSubmit }) {
-  const [form, setForm] = useState({ name: "", email: "", mobile: "", company: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    company: "",
+    person_type: "",
+  });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   function validate() {
     const e = {};
-    if (!form.name.trim() || form.name.trim().length < 2) e.name = "Enter your full name.";
-    if (!EMAIL_RE.test(form.email)) e.email = "Enter a valid email address.";
+    if (!form.name.trim() || form.name.trim().length < 2)
+      e.name = "Enter your full name.";
+    if (!EMAIL_RE.test(form.email))
+      e.email = "Enter a valid email address.";
     if (!MOBILE_RE.test(form.mobile.replace(/\s/g, "")))
       e.mobile = "Enter a valid 10-digit mobile number.";
-    if (!form.company.trim() || form.company.trim().length < 2) e.company = "Enter your company name.";
+    if (!form.company.trim() || form.company.trim().length < 2)
+      e.company = "Enter your company name.";
+    if (!form.person_type)
+      e.person_type = "Select your role.";
     return e;
   }
 
@@ -65,8 +137,13 @@ export default function RegistrationSection({ onSubmit }) {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    onSubmit(form);
+    setApiError("");
+    const result = await onSubmit(form);
+    if (!result.success) {
+      setApiError(result.error);
+      setSubmitting(false);
+    }
+    // On success: context sets isRegistered=true and the page transitions automatically
   }
 
   return (
@@ -124,19 +201,6 @@ export default function RegistrationSection({ onSubmit }) {
             <span style={{ display: "block", paddingLeft: "5rem", color: "#B22222" }}>Visualized.</span>
           </h1>
 
-          {/* <p
-            style={{
-              fontSize: "0.95rem",
-              color: "#4A4A4A",
-              lineHeight: 1.75,
-              marginBottom: "2.5rem",
-              maxWidth: "440px",
-            }}
-          >
-            One Partner for Visualization, Simulation &amp; Automation for a Smarter Future.
-            Delivering AR, VR, AI Agents, Digital Twins, Software, MEP, and Industrial Training solutions.
-          </p> */}
-
           <div
             style={{
               display: "flex",
@@ -144,24 +208,7 @@ export default function RegistrationSection({ onSubmit }) {
               gap: "0.625rem",
               marginBottom: "0.5rem",
             }}
-          >
-            {/* {[].map((tag) => (
-              <div
-                key={tag}
-                style={{
-                  padding: "0.5rem 1rem",
-                  border: "1px solid #D9D9D9",
-                  background: "#F7F7F7",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  color: "#1C1C1C",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {tag}
-              </div>
-            ))} */}
-          </div>
+          />
 
           <div style={{ borderLeft: "3px solid #B22222", paddingLeft: "1rem" }}>
             <p style={{ fontSize: "0.82rem", color: "#757575", lineHeight: 1.65 }}>
@@ -189,7 +236,6 @@ export default function RegistrationSection({ onSubmit }) {
             }}
           >
             <div style={{ marginBottom: "2rem" }}>
-              {/* <div style={{ width: "3px", height: "28px", background: "#B22222", marginBottom: "1rem" }} /> */}
               <h2
                 style={{
                   fontSize: "1.2rem",
@@ -246,6 +292,21 @@ export default function RegistrationSection({ onSubmit }) {
                 onChange={handleChange("company")}
                 disabled={submitting}
               />
+              <SelectField
+                id="person_type"
+                label="Your Role"
+                value={form.person_type}
+                error={errors.person_type}
+                onChange={handleChange("person_type")}
+                disabled={submitting}
+                options={PERSON_TYPE_OPTIONS}
+              />
+
+              {apiError && (
+                <p style={{ fontSize: "0.78rem", color: "#B22222", padding: "0.6rem 0.875rem", background: "#FFF5F5", border: "1px solid #FCA5A5" }}>
+                  {apiError}
+                </p>
+              )}
 
               <div style={{ paddingTop: "0.5rem" }}>
                 <button

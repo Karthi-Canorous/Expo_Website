@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function FeedbackSection({ userData, onSubmitFeedback }) {
   const [rating, setRating] = useState(0);
@@ -18,8 +18,12 @@ export default function FeedbackSection({ userData, onSubmitFeedback }) {
     }
     setError("");
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 900));
-    onSubmitFeedback({ rating, message });
+    const result = await onSubmitFeedback({ rating, message });
+    if (!result.success) {
+      setError(result.error);
+      setSubmitting(false);
+    }
+    // On success: context sets isFeedbackSubmitted=true and the page transitions automatically
   }
 
   return (
@@ -82,8 +86,9 @@ export default function FeedbackSection({ userData, onSubmitFeedback }) {
                     key={star}
                     type="button"
                     onClick={() => setRating(star)}
-                    onMouseEnter={() => setHoverRating(star)}
+                    onMouseEnter={() => !submitting && setHoverRating(star)}
                     onMouseLeave={() => setHoverRating(0)}
+                    disabled={submitting}
                     style={{
                       background: "none",
                       border: "none",
