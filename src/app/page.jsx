@@ -86,9 +86,9 @@ function AppContent() {
   const registerRef = useRef(null);
 
   useEffect(() => {
-    if (isRegistered && overviewRef.current) {
+    if (isRegistered) {
       const timer = setTimeout(() => {
-        overviewRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }, 200);
       return () => clearTimeout(timer);
     }

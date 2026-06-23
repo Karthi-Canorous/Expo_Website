@@ -3,44 +3,9 @@
 import { motion } from "framer-motion";
 
 const differentiators = [
-  {
-    label: "End-to-end engineering visualization pipeline",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-  },
-  {
-    label: "AI-first automation architecture",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 4a4 4 0 0 1 4 4c0 1.1-.45 2.1-1.17 2.83" />
-        <circle cx="12" cy="4" r="2" /><path d="M4 12a4 4 0 0 1 4-4" />
-        <circle cx="4" cy="12" r="2" /><path d="M20 12a4 4 0 0 0-4-4" />
-        <circle cx="20" cy="12" r="2" /><circle cx="12" cy="20" r="2" />
-        <path d="M12 20a4 4 0 0 1-4-4M12 20a4 4 0 0 0 4-4M12 6v4M6 12h4M14 12h4M12 14v4" />
-      </svg>
-    ),
-  },
-  {
-    label: "Cross-industry domain expertise",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="7" width="20" height="14" rx="2" />
-        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-      </svg>
-    ),
-  },
-  {
-    label: "Rapid delivery with enterprise-grade quality",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-  },
+ 
+ 
+
 ];
 
 const cardVariants = {
@@ -54,7 +19,7 @@ const cardVariants = {
 
 export default function CompanyOverview() {
   return (
-    <section style={{ background: "#FFFFFF", borderTop: "1px solid #EFEFEF", padding: "5rem 0" }}>
+    <section style={{ background: "#FFFFFF", borderTop: "1px solid #EFEFEF", padding: "1rem 0 0 0" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2rem" }}>
         <div className="overview-grid">
 
@@ -66,30 +31,31 @@ export default function CompanyOverview() {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             {/* Label */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "2rem" }}>
-              <div style={{ width: "2.5rem", height: "2px", background: "#B22222", flexShrink: 0 }} />
+            {/* <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", justifyContent: "center" }}>
+              
               <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.2em", color: "#B22222", textTransform: "uppercase" }}>
                 Canorous Technology Private Limited
               </span>
-            </div>
+            </div> */}
 
             {/* CTPL + subtitle */}
-            <div style={{ fontSize: "clamp(3rem, 5vw, 4rem)", fontWeight: 900, color: "#1C1C1C", letterSpacing: "-0.03em", lineHeight: 1, marginBottom: "0.625rem" }}>
+            <div style={{ fontSize: "clamp(3rem, 5vw, 4rem)", fontWeight: 900, color: "#1C1C1C", letterSpacing: "0.03em", lineHeight: 1, marginBottom: "0.325rem",marginTop: "0 rem", textAlign: "center" }}>
               CTPL
             </div>
-            <div style={{ fontSize: "clamp(0.95rem, 1.5vw, 1.15rem)", fontWeight: 400, color: "#757575", lineHeight: 1.4, marginBottom: "1.75rem" }}>
-              AI-Powered Engineering Intelligence
-            </div>
+            <div style={{ fontSize: "clamp(0.95rem, 1.5vw, 1.15rem)", fontWeight: 400, color: "#000000", lineHeight: 1.4, marginBottom: "1.75rem", textAlign: "center" }}>
+              Canorous Technology Private Limited 
+             </div>
+             
 
-            <p style={{ fontSize: "0.9rem", color: "#4A4A4A", lineHeight: 1.9, maxWidth: "460px", marginBottom: "2.5rem" }}>
-              Delivering end-to-end solutions across AR, VR, AI Agents, Digital Twins,
-              Software, MEP, and Industrial Training. We bridge the gap between complex
-              engineering data and intuitive visual experiences.
-            </p>
+            <p style={{ fontSize: "0.9rem", color: "#4A4A4A", lineHeight: 1.9, maxWidth: "460px", marginBottom: "0 rem", marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
+Canorous Technologies is an AI-powered technology company delivering innovative digital solutions across industries.
+We specialize in AR/VR, Digital Twins, 3D Visualization, AI Agents, and Business Automation.
+Our expertise includes Unreal Engine development, Pixel Streaming, Industrial Training, and Custom Software Solutions.
+We help businesses visualize, simulate, automate, and accelerate their digital transformation journey.</p>
 
             {/* Meta tags */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0", flexWrap: "wrap" }}>
-              {["Expo 2025", "5 Solution Domains", "Enterprise-Grade"].map((tag, i) => (
+            <div style={{ display: "flex", alignItems: "center", gap: "0", flexWrap: "wrap", justifyContent: "center" }}>
+              {/* {["Expo 2025", "5 Solution Domains", "Enterprise-Grade"].map((tag, i) => (
                 <div key={tag} style={{ display: "flex", alignItems: "center" }}>
                   {i > 0 && <div style={{ width: "1px", height: "12px", background: "#D9D9D9", margin: "0 1rem" }} />}
                   <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
@@ -97,7 +63,7 @@ export default function CompanyOverview() {
                     <span style={{ fontSize: "0.72rem", color: "#9A9A9A", fontWeight: 500, letterSpacing: "0.04em" }}>{tag}</span>
                   </div>
                 </div>
-              ))}
+              ))} */}
             </div>
           </motion.div>
 

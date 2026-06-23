@@ -165,7 +165,7 @@ export default function RegistrationSection({ onSubmit }) {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "3rem",
-          alignItems: "center",
+          alignItems: "start",
         }}
         className="reg-grid"
       >
@@ -174,50 +174,13 @@ export default function RegistrationSection({ onSubmit }) {
           initial={{ opacity: 0, x: -24 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ textAlign: "center", paddingTop: "2rem" }}
         >
-          <div className="company-heading" style={{ textAlign: "center", marginBottom: "0.5rem" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem" }}>
-              <div className="heading-line" style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-              <div style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "1.6rem", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", color: "#B22222" }}>CTPL</div>
-                <div style={{ fontSize: "0.8rem", fontWeight: 1000, letterSpacing: "0.1em", color: "#757575", marginTop: "0.25rem" }}>Canorous Technology Private Limited</div>
-              </div>
-              <div className="heading-line" style={{ width: "2.5rem", height: "2px", background: "#B22222" }} />
-            </div>
+          <div style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", color: "#B22222", marginBottom: "0.25rem" }}>
+            CTPL
           </div>
-
-          <h1
-            style={{
-              fontSize: "clamp(2rem, 4.5vw, 3rem)",
-              fontWeight: 800,
-              color: "#0F172A",
-              lineHeight: 1.15,
-              marginBottom: "0.5rem"
-            }}
-          >
-            <span style={{ display: "block", paddingLeft: "0" }}>AI Powered</span>
-            <span style={{ display: "block", paddingLeft: "5rem", color: "#B22222" }}>Engineering</span>
-            <span style={{ display: "block", paddingLeft: "0" }}>Intelligence.</span>
-            <span style={{ display: "block", paddingLeft: "5rem", color: "#B22222" }}>Visualized.</span>
-          </h1>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0.625rem",
-              marginBottom: "0.5rem",
-            }}
-          />
-
-          <div style={{ borderLeft: "3px solid #B22222", paddingLeft: "1rem" }}>
-            <p style={{ fontSize: "0.82rem", color: "#757575", lineHeight: 1.65 }}>
-              "One partner for Visualization, Simulation &amp; Automation — for
-              a smarter, more efficient future."
-            </p>
-            <p style={{ fontSize: "0.72rem", fontWeight: 700, color: "#B22222", marginTop: "0.5rem", letterSpacing: "0.06em" }}>
-              — CTPL · CANOROUS TECHNOLOGIES
-            </p>
+          <div style={{ fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)", fontWeight: 600, letterSpacing: "0.1em", color: "#757575" }}>
+            Canorous Technology Private Limited
           </div>
         </motion.div>
 

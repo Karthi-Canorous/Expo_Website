@@ -17,12 +17,10 @@ const ICONS = {
     </svg>
   ),
   BrainCircuit: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokelinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 4a4 4 0 0 1 4 4c0 1.1-.45 2.1-1.17 2.83" />
-      <circle cx="12" cy="4" r="2" />
-      <path d="M4 12a4 4 0 0 1 4-4" />
-      <circle cx="4" cy="12" r="2" />
-      <path d="M20 12a4 4 0 0 0-4-4" />
+      <circle cx="12" cy="4" r="2" /><path d="M4 12a4 4 0 0 1 4-4" />
+      <circle cx="4" cy="12" r="2" /><path d="M20 12a4 4 0 0 0-4-4" />
       <circle cx="20" cy="12" r="2" />
       <path d="M12 20a4 4 0 0 1-4-4" />
       <path d="M12 20a4 4 0 0 0 4-4" />
@@ -48,6 +46,39 @@ const ICONS = {
       <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1-1v2z" />
       <path d="M10 18V6a2 2 0 0 1 4 0v12" />
       <path d="M4 18v-4a8 8 0 0 1 16 0v4" />
+    </svg>
+  ),
+  Bot: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <path d="M9 12h6M9 8h6M9 16h6M12 4v2M12 18v2M4 12h2M18 12h2" />
+    </svg>
+  ),
+  Layers: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
+    </svg>
+  ),
+  VrHeadset: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 18v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2" />
+      <path d="M12 4a8 8 0 0 1 8 8v10" />
+      <path d="M12 4a8 8 0 0 0-8 8v10" />
+      <path d="M8 14h8" />
+    </svg>
+  ),
+  Cube: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg>
+  ),
+  Cloud: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
     </svg>
   ),
 };
@@ -271,22 +302,23 @@ export default function SolutionSuite({ onContactClick, onFooterContactClick }) 
         }}>
           <span style={{ 
             fontSize: "0.7rem", 
-            fontWeight: 600, 
+            fontWeight: 800, 
             letterSpacing: "0.15em", 
             textTransform: "uppercase", 
             color: "#B22222",
             display: "block",
-            marginBottom: "0.5rem"
+            marginBottom: "0.1rem",
+            marginTop: "0 rem",
           }}>
             CTPL · End-to-End Solutions Across Industries
           </span>
           <h2
             style={{
               fontSize: "clamp(2rem, 2.8vw, 2.5rem)",
-              fontWeight: 600,
+              fontWeight: 400,
               color: "#0F172A",
               letterSpacing: "-0.03em",
-              marginBottom: "0.5rem",
+              marginBottom: "0.1rem",
             }}
           >
             Our Solution Suite
