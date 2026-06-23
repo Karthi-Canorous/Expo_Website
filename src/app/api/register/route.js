@@ -24,8 +24,6 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid email address." }, { status: 422 });
   if (!MOBILE_RE.test(mobile?.replace(/\s/g, "")))
     return NextResponse.json({ error: "Invalid mobile number." }, { status: 422 });
-  if (!company?.trim() || company.trim().length < 2)
-    return NextResponse.json({ error: "Company name is required." }, { status: 422 });
   if (!person_type?.trim())
     return NextResponse.json({ error: "Person type is required." }, { status: 422 });
 

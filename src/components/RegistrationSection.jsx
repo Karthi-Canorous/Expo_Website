@@ -16,7 +16,17 @@ const PERSON_TYPE_OPTIONS = [
   { value: "Other", label: "Other" },
 ];
 
-function Field({ id, label, type = "text", placeholder, value, error, onChange, disabled }) {
+function Field({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  value,
+  error,
+  onChange,
+  disabled,
+  required = true,
+}) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
       <label
@@ -29,7 +39,7 @@ function Field({ id, label, type = "text", placeholder, value, error, onChange, 
           color: "#4A4A4A",
         }}
       >
-        {label} <span style={{ color: "#B22222" }}>*</span>
+        {label} {required && <span style={{ color: "#B22222" }}>*</span>}
       </label>
       <input
         id={id}
@@ -118,8 +128,6 @@ export default function RegistrationSection({ onSubmit }) {
       e.email = "Enter a valid email address.";
     if (!MOBILE_RE.test(form.mobile.replace(/\s/g, "")))
       e.mobile = "Enter a valid 10-digit mobile number.";
-    if (!form.company.trim() || form.company.trim().length < 2)
-      e.company = "Enter your company name.";
     if (!form.person_type)
       e.person_type = "Select your role.";
     return e;
@@ -254,6 +262,7 @@ export default function RegistrationSection({ onSubmit }) {
                 error={errors.company}
                 onChange={handleChange("company")}
                 disabled={submitting}
+                required={false}
               />
               <SelectField
                 id="person_type"
