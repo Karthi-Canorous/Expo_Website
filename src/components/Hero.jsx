@@ -38,18 +38,20 @@ export default function Hero() {
       </div>
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(4)].map((_, i) => (
+        {[...Array(2)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute border border-primary/5 rounded-2xl"
             style={{
-              width: 80 + i * 60,
-              height: 80 + i * 60,
-              top: `${20 + i * 18}%`,
-              left: `${10 + i * 20}%`,
+              width: 80 + i * 100,
+              height: 80 + i * 100,
+              top: `${25 + i * 30}%`,
+              left: `${15 + i * 40}%`,
             }}
-            animate={{ rotate: 360, scale: [1, 1.03, 1] }}
-            transition={{ duration: 25 + i * 5, repeat: Infinity, ease: "linear" }}
+            initial={{ rotate: 0 }}
+            whileInView={{ rotate: 360 }}
+            transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
+            viewport={{ once: false, amount: 0.1 }}
           />
         ))}
       </div>
